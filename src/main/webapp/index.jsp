@@ -17,7 +17,7 @@
 
     <!-- Последняя компиляция и сжатый JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
   <div class="container">
@@ -27,23 +27,23 @@
         <div class="panel panel-primary">
           <div class="panel-heading"><h3>Введите данные для входа</h3></div>
         <div class="panel-body">
-      <form class="form-horizontal" method="post" action = "/student/auth">
+      <form class="form-horizontal js-form-validate" method="post" action = "/student/auth">
           <div class="form-group">
             <label for="inputLogin" class="control-label col-md-3">Login</label>
             <div class="col-md-9">
-              <input type="text" id="inputLogin" name="login" class="form-control" placeholder="Login" autofocus="true" autocomplete="off">
+              <input type="text" id="inputLogin" name="login" class="form-control" placeholder="Login" autofocus="true" autocomplete="off" required autofocus>
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword" class="control-label col-md-3">Password</label>
             <div class="col-md-9">
-              <input type="password" id="inputPassword" name = "password" class="form-control" placeholder="Password" autocomplete="off">
+              <input type="password" id="inputPassword" name = "password" class="form-control" placeholder="Password" autocomplete="off" required autofocus>
             </div>
           </div>
         <div class="form-group">
           <div class="col-md-9 col-md-offset-3">
           <button class="btn btn-lg btn-primary" type="submit" value = "login">Войти</button>
-          <button class="btn btn-lg btn-primary" type="submit" value = "register" formaction="/student/register.jsp">Регистрация</button>
+          <%--<button class="btn btn-lg btn-primary" type="submit" value = "register" formaction="/student/register.jsp">Регистрация</button>--%>
           </div>
         </div>
 
@@ -54,6 +54,8 @@
     <div class="col-md-3">
     </div>
   </div> <!-- /container -->
+
+
   <%--<form id = "myForm" method="post" action = "/student/auth">--%>
   <%--<input type="text" name="login" />--%>
     <%--<input type = "password" name = "password">--%>

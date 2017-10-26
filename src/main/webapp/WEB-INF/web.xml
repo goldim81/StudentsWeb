@@ -3,38 +3,38 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    <servlet>
+<!--    <servlet>
         <servlet-name>
             MyServlet
         </servlet-name>
         <servlet-class>
-            servlets.HelloServlet
+            students.servlets.HelloServlet
         </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StudentServlet</servlet-name>
-        <servlet-class>servlets.StudentsServlet</servlet-class>
+        <servlet-class>students.servlets.StudentsServlet</servlet-class>
     </servlet>
-    
+
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
+        <servlet-class>students.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DelStudentServlet</servlet-name>
-        <servlet-class>servlets.DeleteStudentsServlet</servlet-class>
+        <servlet-class>students.servlets.DeleteStudentsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditStudentServlet</servlet-name>
-        <servlet-class>servlets.EditStudentServlet</servlet-class>
+        <servlet-class>students.servlets.EditStudentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddStudentServlet</servlet-name>
-        <servlet-class>servlets.AddStudentServlet</servlet-class>
+        <servlet-class>students.servlets.AddStudentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterUserServlet</servlet-name>
-        <servlet-class>servlets.RegisterUserServlet</servlet-class>
+        <servlet-class>students.servlets.RegisterUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -58,7 +58,7 @@
         <servlet-name>StudentServlet</servlet-name>
         <url-pattern>/students</url-pattern>
     </servlet-mapping>
-    
+
     <servlet-mapping>
         <servlet-name>DelStudentServlet</servlet-name>
         <url-pattern>/delstudent</url-pattern>
@@ -71,11 +71,35 @@
 
     <filter>
         <filter-name>Login</filter-name>
-        <filter-class>servlets.filters.LoginFilter</filter-class>
+        <filter-class>students.servlets.filters.LoginFilter</filter-class>
     </filter>
 
     <filter-mapping>
         <filter-name>Login</filter-name>
         <url-pattern>/students</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
+    
+<!--    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/bean.xml</param-value>
+    </context-param>-->
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+    </context-param>
+
 </web-app>

@@ -21,6 +21,14 @@
           <element id="library" level="project" name="Gradle: org.postgresql:postgresql:42.1.4" />
           <element id="library" level="project" name="Gradle: jstl:jstl:1.2" />
           <element id="library" level="project" name="Gradle: log4j:log4j:1.2.16" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.3.12.RELEASE/986e5dcd4435e780f6be64f8185eaa51523cf851/spring-webmvc-4.3.12.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.3.12.RELEASE/86c29588cca74d0fc848b194cb13fcdfd12bc990/spring-web-4.3.12.RELEASE.jar" />
         </element>
       </element>
     </root>
