@@ -38,8 +38,8 @@ public class StudentDAO implements IDAO <Student>{
         Statement statement = null;
         try {
             statement = manager.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT st.*, gr.name\n" +
-                    "FROM public.\"Student\" st LEFT JOIN public.\"Group\" gr ON st.\"groupId\" = gr.id;");
+            ResultSet resultSet = statement.executeQuery("SELECT st.*, gr.name " +
+                    "FROM student st LEFT JOIN groups gr ON st.group_id = gr.id;");
             while (resultSet.next()) {
                 Student student = new Student(resultSet.getShort("id"), resultSet.getString("firstName"), resultSet.getString("secondName"),
                         resultSet.getString("lastName"), resultSet.getDate("birthday").toLocalDate());
@@ -58,7 +58,7 @@ public class StudentDAO implements IDAO <Student>{
     public Student getByID(int id) throws StudentDAOException {
         PreparedStatement statement = null;
         try {
-            statement = manager.getConnection().prepareStatement("SELECT * FROM public.\"Student\" WHERE id = ? ");
+            statement = manager.getConnection().prepareStatement("SELECT * FROM student WHERE id = ? ");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -72,15 +72,14 @@ public class StudentDAO implements IDAO <Student>{
 
     private PreparedStatement getUpdateStatement() throws SQLException {
         return manager.getConnection().prepareStatement(
-                "UPDATE public.\"Student\" " +
-                        "SET  \"firstName\" = ?, \"lastName\" = ?, \"secondName\" = ?, birthday = ?, \"groupId\" = ?" +
-                        "WHERE id = ? ");
+                "UPDATE student " +
+                "SET  firstname = ?, lastname = ?, secondname = ?, birthday = ?, group_id = ?" +
+                "WHERE id = ? ");
     }
     @Override
     public void update(Student obj) throws StudentDAOException {
-        PreparedStatement statement = null;
-        try {
-            statement = getUpdateStatement();
+        try (PreparedStatement statement = getUpdateStatement())
+        {
             statement.setString(1, obj.getFirstName());
             statement.setString(2, obj.getFamilyName());
             statement.setString(3, obj.getSecondName());
@@ -121,7 +120,7 @@ public class StudentDAO implements IDAO <Student>{
         PreparedStatement statement = null;
         try {
             statement = manager.getConnection().prepareStatement(
-                    "DELETE FROM public.\"Student\" WHERE id = ? ");
+                    "DELETE FROM student WHERE id = ? ");
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -132,7 +131,7 @@ public class StudentDAO implements IDAO <Student>{
 
     private PreparedStatement getInsertStatement() throws SQLException {
         return manager.getConnection().prepareStatement(
-                "INSERT INTO public.\"Student\" (\"firstName\", \"lastName\", \"secondName\", birthday, \"groupId\") " +
+                "INSERT INTO student (firstname, lastname, secondname, birthday, group_id) " +
                         "VALUES  (?, ?, ?, ?, ?)");
     }
 

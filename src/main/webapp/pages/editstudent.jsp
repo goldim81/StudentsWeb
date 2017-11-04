@@ -24,12 +24,12 @@
 <body>
 <div class="container">
     <form name="edit_form" method="post" action="/student/editstudent">
-        <input type="text" id="id" name="id" value="${student.getId()} disable">
-        <input type="text" id="firsname" name="firsname" value="${student.getFirstName()}">
-        <input type="text" id="secondname" name="secondname" value="${student.getSecondName()}">
-        <input type="text" id="familyname" name="familyname" value="${student.getFamilyName()}">
-        <input type="text" id="birthday" name="birthday" value="${student.getBdate()}">
-        <input type="text" id="groupid" name="groupid" value="${student.getGroupId()}">
+        <input type="text" id="id" name="id" value="${student.id}">
+        <input type="text" id="firsname" name="firsname" value="${student.firstname}">
+        <input type="text" id="secondname" name="secondname" value="${student.secondname}">
+        <input type="text" id="familyname" name="familyname" value="${student.lastname}">
+        <input type="text" id="birthday" name="birthday" value="${student.birthday}">
+        <input type="text" id="groupid" name="groupid" value="${student.group_id}">
         <input type="submit" value = "update">
     </form>
 </div>

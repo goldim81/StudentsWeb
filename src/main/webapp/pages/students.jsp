@@ -41,17 +41,17 @@
     <tbody>
     <c:forEach items="${list}" var="item">
         <tr>
-            <th scope="row"><c:out value="${item.getId()}"></c:out></th>
-            <td><c:out value="${item.getFirstName()}"></c:out></td>
-            <td><c:out value="${item.getFamilyName()}"></c:out></td>
-            <td><c:out value="${item.getSecondName()}"></c:out></td>
-            <td><c:out value="${item.getBdate()}"></c:out></td>
-            <td><c:out value="${item.getGroupId()}"></c:out></td>
+            <th scope="row"><c:out value="${item.id}"></c:out></th>
+            <td><c:out value="${item.firstname}"></c:out></td>
+            <td><c:out value="${item.lastname}"></c:out></td>
+            <td><c:out value="${item.secondname}"></c:out></td>
+            <td><c:out value="${item.birthday}"></c:out></td>
+            <td><c:out value="${item.group_id}"></c:out></td>
             <td>
-                <button type="submit" class="btn btn-danger" name="del_by_id" value="${item.getId()}" formaction="/student/delstudent">
+                <button type="submit" class="btn btn-danger" name="del_by_id" value="${item.id}" formaction="/student/delstudent">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
-                <button type="submit" class="btn btn-primary" name="edit_by_id" value="${item.getId()}" formaction="/student/editstudent">
+                <button type="submit" class="btn btn-primary" name="edit_by_id" value="${item.id}" formaction="/student/editstudent">
                     <span class="glyphicon glyphicon-edit"></span>
                 </button>
             </td>

@@ -1,17 +1,18 @@
 package students.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import students.DB.DAO.StudentDAO;
+import students.DB.DAO.StudentHibernateDAO;
+import students.DB.entitys.StudentEntitys;
 import students.pojo.Group;
 import students.pojo.Student;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,18 +20,14 @@ import java.util.List;
 
 @Controller
 public class StudentsController {
+    @Autowired
+    StudentHibernateDAO studentHibernateDAO;
+
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public ModelAndView showStudentList(){
-        StudentDAO studentDAO = new StudentDAO();
-        List<Student> students=null;
-        try {
-            students = studentDAO.getAll();
-        } catch (StudentDAO.StudentDAOException e) {
-            e.printStackTrace();
-        }
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("students");
+        ModelAndView modelAndView = new ModelAndView("students");
+        List<StudentEntitys> students = studentHibernateDAO.getAll();
         modelAndView.addObject("list", students);
         return modelAndView;
     }
@@ -46,23 +43,6 @@ public class StudentsController {
         return "redirect:/students";
     }
 
-    @RequestMapping(value = "/editstudent", method = RequestMethod.GET)
-    public ModelAndView editStudent(@RequestParam(name = "edit_by_id") int idStudent){
-        StudentDAO studentDAO = new StudentDAO();
-
-        Student student = null;
-        try {
-            student = studentDAO.getByID(idStudent);
-        } catch (StudentDAO.StudentDAOException e) {
-            e.printStackTrace();
-        }
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("editstudent");
-        modelAndView.addObject("student", student);
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/addstudent", method = RequestMethod.GET)
     public String getViewAddStudent(){
         return "addstudent";
@@ -76,23 +56,26 @@ public class StudentsController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        int id = Integer.decode(req.getParameter("id"));
+//        int id = Integer.decode(req.getParameter("id"));
         String firstName = req.getParameter("firstname");
         String secondname = req.getParameter("secondname");
         String familyname = req.getParameter("familyname");
         String birthday = req.getParameter("birthday");
+        int groupId = Integer.parseInt(req.getParameter("groupid"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(birthday, formatter);
 
-        Student student = new Student(id,firstName, secondname, familyname, date);
-        student.setGroup(new Group(1, "Группа1"));
-        StudentDAO studentDAO = new StudentDAO();
-        try {
-            studentDAO.insertOne(student);
-        } catch (StudentDAO.StudentDAOException e) {
-            e.printStackTrace();
-        }
+        StudentEntitys student = new StudentEntitys(groupId, firstName, secondname, familyname, date);
+        studentHibernateDAO.addStudent(student);
         return "redirect:/students";
+    }
+
+    @RequestMapping(value = "/editstudent", method = RequestMethod.GET)
+    public ModelAndView editStudent(@RequestParam(name = "edit_by_id") int idStudent){
+        ModelAndView modelAndView = new ModelAndView("editstudent");
+        StudentEntitys student = studentHibernateDAO.getById(idStudent);
+        modelAndView.addObject("student", student);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/editstudent", method = RequestMethod.POST)
@@ -103,21 +86,16 @@ public class StudentsController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        int id = Integer.decode(req.getParameter("id"));
+        int id = Integer.parseInt(req.getParameter("id"));
         String firstName = req.getParameter("firsname");
         String secondname = req.getParameter("secondname");
         String familyname = req.getParameter("familyname");
         String birthday = req.getParameter("birthday");
+        int groupId = Integer.parseInt(req.getParameter("groupid"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(birthday, formatter);
-        Student student = new Student(id,firstName, secondname, familyname, date);
-        student.setGroup(new Group(1, "Группа1"));
-        StudentDAO studentDAO = new StudentDAO();
-        try {
-            studentDAO.update(student);
-        } catch (StudentDAO.StudentDAOException e) {
-            e.printStackTrace();
-        }
+        StudentEntitys student = new StudentEntitys(id,groupId, firstName, secondname, familyname, date);
+        studentHibernateDAO.updateStudent(student);
         return "redirect:/students";
     }
 

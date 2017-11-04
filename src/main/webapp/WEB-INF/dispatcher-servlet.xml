@@ -8,7 +8,7 @@
                            http://www.springframework.org/schema/context/spring-context.xsd
                            ">
 
-  <context:component-scan base-package="students.controllers"/>
+  <context:component-scan base-package="students"/>
 
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix" value="/pages/"/>
