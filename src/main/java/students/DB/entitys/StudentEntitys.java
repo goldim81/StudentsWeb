@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class StudentEntitys {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Student_id_seq_gen")
-    @SequenceGenerator(name = "Student_id_seq_gen", sequenceName = "public.\"Student_id_seq\"")
+    @SequenceGenerator(allocationSize = 1, name = "Student_id_seq_gen", sequenceName = "public.\"Student_id_seq\"")
     private int id;
     private int group_id;
     private String firstname;
