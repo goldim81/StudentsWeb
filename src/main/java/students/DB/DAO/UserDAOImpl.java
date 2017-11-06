@@ -2,7 +2,6 @@ package students.DB.DAO;
 
 import students.DB.ConnectionManagerPostgreSQL;
 import students.DB.IConnectionManager;
-import students.pojo.Student;
 import students.pojo.User;
 
 import java.sql.PreparedStatement;

@@ -29,7 +29,7 @@
         <input type="text" id="secondname" name="secondname" value="${student.secondname}">
         <input type="text" id="familyname" name="familyname" value="${student.lastname}">
         <input type="text" id="birthday" name="birthday" value="${student.birthday}">
-        <input type="text" id="groupid" name="groupid" value="${student.group_id}">
+        <input type="text" id="groupid" name="groupid" value="${student.group.id}">
         <input type="submit" value = "update">
     </form>
 </div>

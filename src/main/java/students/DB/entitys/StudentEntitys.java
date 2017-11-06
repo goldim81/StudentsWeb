@@ -10,23 +10,25 @@ public class StudentEntitys {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Student_id_seq_gen")
     @SequenceGenerator(allocationSize = 1, name = "Student_id_seq_gen", sequenceName = "public.\"Student_id_seq\"")
     private int id;
-    private int group_id;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private GroupEntity group;
     private String firstname;
     private String secondname;
     private String lastname;
     private LocalDate birthday;
 
-    public StudentEntitys(int id, int group_id, String firstname, String secondname, String lastname, LocalDate birthday) {
-        this.id = id;
-        this.group_id = group_id;
+    public StudentEntitys(GroupEntity group, String firstname, String secondname, String lastname, LocalDate birthday) {
+        this.group = group;
         this.firstname = firstname;
         this.secondname = secondname;
         this.lastname = lastname;
         this.birthday = birthday;
     }
 
-    public StudentEntitys(int group_id, String firstname, String secondname, String lastname, LocalDate birthday) {
-        this.group_id = group_id;
+    public StudentEntitys(int id, GroupEntity group, String firstname, String secondname, String lastname, LocalDate birthday) {
+        this.id = id;
+        this.group = group;
         this.firstname = firstname;
         this.secondname = secondname;
         this.lastname = lastname;
@@ -34,6 +36,10 @@ public class StudentEntitys {
     }
 
     public StudentEntitys() {
+    }
+
+    public GroupEntity getGroup() {
+        return group;
     }
 
     public int getId() {
@@ -44,43 +50,22 @@ public class StudentEntitys {
         this.id = id;
     }
 
-    public int getGroup_id() {
-        return group_id;
-    }
-
-    public void setGroup_id(int group_id) {
-        this.group_id = group_id;
-    }
-
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
     public String getSecondname() {
         return secondname;
     }
 
-    public void setSecondname(String secondname) {
-        this.secondname = secondname;
-    }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     public LocalDate getBirthday() {
         return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
     }
 }

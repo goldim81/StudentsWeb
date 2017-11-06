@@ -36,7 +36,7 @@
 <form name="list_students">
 <table class="table table-bordered table-striped">
     <thead>
-        <th width="100">Id</th> <th>Имя</th> <th>Фамилия</th> <th>Отчество</th> <th>День Рождения</th> <th>Id Группы</th> <th>действие</th>
+        <th width="100">Id</th> <th>Имя</th> <th>Фамилия</th> <th>Отчество</th> <th>День Рождения</th> <th>Имя Группы</th> <th>действие</th>
     </thead>
     <tbody>
     <c:forEach items="${list}" var="item">
@@ -46,7 +46,7 @@
             <td><c:out value="${item.lastname}"></c:out></td>
             <td><c:out value="${item.secondname}"></c:out></td>
             <td><c:out value="${item.birthday}"></c:out></td>
-            <td><c:out value="${item.group_id}"></c:out></td>
+            <td><c:out value="${item.group.name}"></c:out></td>
             <td>
                 <button type="submit" class="btn btn-danger" name="del_by_id" value="${item.id}" formaction="/student/delstudent">
                     <span class="glyphicon glyphicon-trash"></span>
